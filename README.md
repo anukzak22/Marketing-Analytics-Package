@@ -3,6 +3,12 @@
 
 The **bassmodel** package is a Python package that provides functions for fitting and predicting using the Bass diffusion model.
 
+To forecast how quickly new items will be adopted in a market, the Bass model is a well-liked method in marketing analytics. The Bass model package can be used to aid with a number of issues relating to the marketing and adoption of new products, such as:
+
+- Forecasting product sales
+- Estimating the market potential with diffusion
+- Comparing the performance of different products
+
 ## Functions
 
 
@@ -49,3 +55,9 @@ plot the Bass diffusion curve:
 ```
 bassmodel.plot_bass(params['p'], params['q'], 'Bass diffusion curve')
 ```
+
+
+Sample data to check the package 
+
+[ https://drive.google.com/drive/folders/1rtiKrg9xa2TMH8cTqN2l-eHWqQG1ZH6c?usp=sharing ]
+
