@@ -2,7 +2,6 @@
 
 import numpy as np
 from scipy.optimize import minimize
-import math
 import matplotlib.pyplot as plt
 import numpy as np
 """
@@ -16,23 +15,23 @@ Functions:
 
 """
 
-def diffusion(sales):
+def diffusion(sales, t = None):
     """
-    Fits a Bass diffusion model to sales data using nonlinear least squares optimization..
-
-    Parameters
-    ----------
-    sales: data's sales column 
-
-    Returns
-    -------
-    numpy.ndarray
-        The fraction of the total market that adopts at times `t` with parameters `p` and `q`.
     Fits a Bass diffusion model to sales data using nonlinear least squares optimization.
+
+    :param sales: An array of sales data.
+    :param t: An optional array of time values corresponding to the sales data.
+              If not specified, a default time array will be generated.
+    :return: A dictionary containing the estimated Bass model parameters p, q, and m.
     """
+    if t is None:
+        t = np.arange(len(sales))
+    else:
+        if len(t) != len(sales):
+            raise ValueError("The length of 't' must be the same as the length of 'sales'.")
+
     def objective(w):
         p, q, m = w
-        t = np.arange(len(sales))
         f = m * (1 - np.exp(-(p + q) * t)) / (1 + q / p * np.exp(-(p + q) * t))
         return np.sum((f - sales) ** 2)
 
@@ -40,7 +39,6 @@ def diffusion(sales):
     res = minimize(objective, x0, method='Nelder-Mead')
     w = res.x
     return {'p': w[0], 'q': w[1], 'm': w[2]}
-
 
 def adoption_rate(t, p, q, m, N):
     """
