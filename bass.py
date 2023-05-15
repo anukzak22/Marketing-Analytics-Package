@@ -16,52 +16,13 @@ Functions:
 
 """
 
-
-
-def calc_bass_parameters(data):
-    """
-    Calculates the parameters of the Bass diffusion model using a given set of adoption data.
-
-    Parameters:
-    -----------
-    data : array-like
-        An array-like object of observed adoption values over time
-
-    Returns:
-    --------
-    params : dict
-        A dictionary containing the estimated Bass model parameters (p, q, m)
-    """
-    # Define the objective function to minimize
-    def objective(params, t, y):
-        p, q, m = params
-        y_pred = m * ((p + q)**2 / p * np.exp(-(p + q) * t)) / (1 + (q / p) * np.exp(-(p + q) * t))**2
-        return np.sum((y - y_pred)**2)
-
-    # Initial parameter values
-    p0 = 0.01
-    q0 = 0.01
-    m0 = np.max(data)
-
-    # Minimize the objective function
-    res = minimize(objective, [p0, q0, m0], args=(np.arange(len(data)), data))
-
-    # Extract the estimated parameters
-    p, q, m = res.x
-
-    # Package the parameters into a dictionary
-    params = {'p': p, 'q': q, 'm': m}
-
-    return params
-
-
 def diffusion(sales):
     """
     Fits a Bass diffusion model to sales data using nonlinear least squares optimization..
 
     Parameters
     ----------
-    sales: datas sales column 
+    sales: data's sales column 
 
     Returns
     -------
@@ -156,7 +117,7 @@ def bass_F(t, p, q):
     return 1 - (q / p) * (1 / (1 + (q / p) * exp_term)) * (1 - exp_term)
 
 
-def predict_bass_model(params, m):
+def predict_bass_model(params,t):
     """
     Predicts future adoption rates based on a given set of time periods and the estimated Bass model parameters.
 
@@ -209,6 +170,6 @@ def plot_bass(p, q, title):
     """
     cum_ad = plt.plot(np.arange(0, 16), [quad(partial(bass_F, p=p, q=q), 0, t)[0] for t in range(0, 16)], label="cumulative adoptions")
     time_ad = plt.plot(np.arange(0, 16), [quad(partial(bass_f, p=p, q=q), 0, t)[0] for t in range(0, 16)], label="adoptions at time t")
-    plt.title("Room Air Conditioner")
+    plt.title(f"{title}")
     plt.legend()
     plt.show()
