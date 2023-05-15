@@ -1,7 +1,7 @@
 
 # bassmodel
 
-The bassmodel package is a Python package that provides functions for fitting and predicting using the Bass diffusion model.
+The **bassmodel** package is a Python package that provides functions for fitting and predicting using the Bass diffusion model.
 
 ## Functions
 
