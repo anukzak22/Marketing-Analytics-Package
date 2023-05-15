@@ -1,9 +1,0 @@
-LICENSE
-MANIFEST.in
-README.md
-setup.py
-bassmodel.egg-info/PKG-INFO
-bassmodel.egg-info/SOURCES.txt
-bassmodel.egg-info/dependency_links.txt
-bassmodel.egg-info/requires.txt
-bassmodel.egg-info/top_level.txt

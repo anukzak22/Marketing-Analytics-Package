@@ -19,9 +19,13 @@ def diffusion(sales, t = None):
     """
     Fits a Bass diffusion model to sales data using nonlinear least squares optimization.
 
-    :param sales: An array of sales data.
-    :param t: An optional array of time values corresponding to the sales data.
+    Parameters
+    ----------
+
+    sales: An array of sales data.
+    t: An optional array of time values corresponding to the sales data.
               If not specified, a default time array will be generated.
+              
     :return: A dictionary containing the estimated Bass model parameters p, q, and m.
     """
     if t is None:
